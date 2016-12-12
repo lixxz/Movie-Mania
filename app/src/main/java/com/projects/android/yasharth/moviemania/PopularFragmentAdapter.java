@@ -16,14 +16,14 @@ public class PopularFragmentAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        if (PopularFragment.movieDetails!=null) {
-            return PopularFragment.movieDetails.size();
+        if (PopularFragment.sPopularInitialDetailses !=null) {
+            return PopularFragment.sPopularInitialDetailses.size();
         }
         return 0;
     }
 
     public Object getItem(int position) {
-        return PopularFragment.movieDetails.get(position);
+        return PopularFragment.sPopularInitialDetailses.get(position);
     }
 
     public long getItemId(int position) {
@@ -40,11 +40,11 @@ public class PopularFragmentAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
         String url = "http://image.tmdb.org/t/p/w154/" +
-                PopularFragment.movieDetails.get(position).getPoster_path();
+                PopularFragment.sPopularInitialDetailses.get(position).getPoster_path();
 
         Picasso.with(context).
                 load(url).
-                placeholder(R.drawable.placeholder). //app doesn't work without it, why?
+                placeholder(R.drawable.placeholder).
                 fit().
                 into(imageView);
         return imageView;

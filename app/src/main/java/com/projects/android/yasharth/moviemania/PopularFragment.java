@@ -1,14 +1,16 @@
 package com.projects.android.yasharth.moviemania;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.projects.android.yasharth.moviemania.Data.MovieDetail;
+import com.projects.android.yasharth.moviemania.Data.InitialDetails;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +29,15 @@ import okhttp3.Response;
 public class PopularFragment extends Fragment {
 
     public final String SORT_ORDER = "popular";
+    public static final String SORT_ORDER_POPULAR = "popular";
+    public static final String SORT_ORDER_TOP_RATED = "top_Rated";
+    public static final String SORT_ORDER_FAVORITES = "Favorites";
 
     public PopularFragmentAdapter popularFragmentAdapter;
 
-    public static ArrayList<MovieDetail> movieDetails = new ArrayList<>();
+    public static ArrayList<InitialDetails> sPopularInitialDetailses = new ArrayList<>();
 
-    private static int item = 0;
+    private static int sItem = 0;
 
     public PopularFragment() {
     }
@@ -52,13 +57,24 @@ public class PopularFragment extends Fragment {
         popularFragmentAdapter = new PopularFragmentAdapter(getContext());
         gridView.setAdapter(popularFragmentAdapter);
 
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getContext(), MovieDetailActivity.class);
+                intent.putExtra("MovieId", sPopularInitialDetailses.get(position).getId());
+                intent.putExtra("MovieBackdrop",
+                        sPopularInitialDetailses.get(position).getBackdrop_path());
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        if (movieDetails.size() == 0) {
+        if (sPopularInitialDetailses.size() == 0) {
             loadPosters(SORT_ORDER);
         }
     }
@@ -103,7 +119,6 @@ public class PopularFragment extends Fragment {
                     @Override
                     public void run() {
                         popularFragmentAdapter.notifyDataSetChanged();
-                        Log.e("MovieDetail 3", movieDetails.get(4).getTitle());
                     }
                 });
             }
@@ -117,10 +132,7 @@ public class PopularFragment extends Fragment {
         // These are the names of the JSON objects that need to be extracted.
         final String RESULT = "results";
         final String POSTER_PATH = "poster_path";
-        final String TITLE = "title";
-        final String RELDATE = "release_date";
-        final String SYNOPSIS = "overview";
-        final String AVERAGE = "vote_average";
+        final String BACKDROP_PATH = "backdrop_path";
         final String MOVIE_ID = "id";
 
         JSONObject movieJson = new JSONObject(movieJsonStr);
@@ -131,13 +143,10 @@ public class PopularFragment extends Fragment {
             // Get the JSON object representing the movies
             JSONObject movieList = movieArray.getJSONObject(i);
 
-            movieDetails.add(item, new MovieDetail(movieList.getString(POSTER_PATH),
-                    movieList.getString(TITLE),
-                    movieList.getString(RELDATE),
-                    movieList.getString(SYNOPSIS),
-                    movieList.getDouble(AVERAGE),
+            sPopularInitialDetailses.add(sItem, new InitialDetails(movieList.getString(POSTER_PATH),
+                    movieList.getString(BACKDROP_PATH),
                     movieList.getInt(MOVIE_ID)));
-            item++;
+            sItem++;
         }
     }
 }
