@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movie Mania</string>
+    <string name="title_movie_detail">Movie Detail</string>
+    <string name="title_activity_home_screen">Movie Mania</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="search_movie">Search a movie</string>
+</resources>
