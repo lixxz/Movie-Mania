@@ -4,6 +4,8 @@ package com.projects.android.yasharth.moviemania;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,7 +33,9 @@ public class MovieDetailFragment extends Fragment {
     public static String movieId;
     public static String backdrop_path;
 
-    public static MovieDetailFragmentAdapter detailFragmentAdapter;
+
+    private RecyclerView mRecyclerView;
+    private MovieDetailFragmentAdapter mAdapter;
 
     public static MovieContentDetails movieContentDetails;
 
@@ -42,6 +46,7 @@ public class MovieDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.fragment_movie_detail, container, false);
         Toolbar toolbar = (Toolbar) rootView.findViewById(R.id.detail_toolbar);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
@@ -57,9 +62,16 @@ public class MovieDetailFragment extends Fragment {
 
         Picasso.with(getContext()).
                 load(url).
-                placeholder(R.drawable.ic_video_library_black_24dp).
+                placeholder(R.drawable.ic_video_library_black_24dp). //TODO: replace it
                 fit().
                 into(imageView);
+
+
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.movie_content);
+        mAdapter = new MovieDetailFragmentAdapter(getContext(), movieContentDetails);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -112,7 +124,7 @@ public class MovieDetailFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
             }
