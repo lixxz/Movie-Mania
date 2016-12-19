@@ -30,14 +30,14 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class MovieDetailFragment extends Fragment {
-    public static String movieId;
-    public static String backdrop_path;
+    private String movieId;
+    private String backdrop_path;
 
 
     private RecyclerView mRecyclerView;
     private MovieDetailFragmentAdapter mAdapter;
 
-    public static MovieContentDetails movieContentDetails;
+    private MovieContentDetails movieContentDetails;
 
     public MovieDetailFragment() {
 
@@ -62,13 +62,12 @@ public class MovieDetailFragment extends Fragment {
 
         Picasso.with(getContext()).
                 load(url).
-                placeholder(R.drawable.ic_video_library_black_24dp). //TODO: replace it
                 fit().
                 into(imageView);
 
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.movie_content);
-        mAdapter = new MovieDetailFragmentAdapter(getContext(), movieContentDetails);
+        mAdapter = new MovieDetailFragmentAdapter(getContext());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -124,6 +123,7 @@ public class MovieDetailFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        mAdapter.RefreshData(movieContentDetails);
                         mAdapter.notifyDataSetChanged();
                     }
                 });

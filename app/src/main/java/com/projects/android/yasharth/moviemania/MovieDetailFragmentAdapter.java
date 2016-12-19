@@ -14,8 +14,11 @@ public class MovieDetailFragmentAdapter extends
     private Context mContext;
     private MovieContentDetails mMovieContentDetails;
 
-    public MovieDetailFragmentAdapter(Context context, MovieContentDetails movieContentDetails) {
+    public MovieDetailFragmentAdapter(Context context) {
         mContext = context;
+    }
+
+    public void RefreshData(MovieContentDetails movieContentDetails) {
         mMovieContentDetails = movieContentDetails;
     }
 
@@ -48,7 +51,7 @@ public class MovieDetailFragmentAdapter extends
 
         return new ViewHolder(movieContent);
     }
-    
+
     @Override
     public void onBindViewHolder(MovieDetailFragmentAdapter.ViewHolder holder, int position) {
         if (mMovieContentDetails != null) {
