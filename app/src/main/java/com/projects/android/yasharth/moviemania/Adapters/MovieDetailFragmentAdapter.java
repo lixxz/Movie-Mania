@@ -1,4 +1,4 @@
-package com.projects.android.yasharth.moviemania;
+package com.projects.android.yasharth.moviemania.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.projects.android.yasharth.moviemania.Data.MovieContentDetails;
+import com.projects.android.yasharth.moviemania.R;
 
 public class MovieDetailFragmentAdapter extends
         RecyclerView.Adapter<MovieDetailFragmentAdapter.ViewHolder> {

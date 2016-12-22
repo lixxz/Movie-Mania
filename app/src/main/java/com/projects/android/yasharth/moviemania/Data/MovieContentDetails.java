@@ -9,14 +9,14 @@ public class MovieContentDetails implements Parcelable {
 
     private String title;
     private String release_date;
-    private int runtime;
+    private String runtime;
     private String genres;
-    private Double rating;
+    private String rating;
     private String description;
 
 
-    public MovieContentDetails(String title, String release_date, int runtime, String genres,
-                               Double rating, String description) {
+    public MovieContentDetails(String title, String release_date, String runtime, String genres,
+                               String rating, String description) {
         this.title = title;
         this.release_date = release_date;
         this.runtime = runtime;
@@ -28,9 +28,9 @@ public class MovieContentDetails implements Parcelable {
     private MovieContentDetails(Parcel in) {
         title = in.readString();
         release_date = in.readString();
-        runtime = in.readInt();
+        runtime = in.readString();
         genres = in.readString();
-        rating = in.readDouble();
+        rating = in.readString();
         description = in.readString();
     }
 
@@ -43,9 +43,9 @@ public class MovieContentDetails implements Parcelable {
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(title);
         parcel.writeString(release_date);
-        parcel.writeInt(runtime);
+        parcel.writeString(runtime);
         parcel.writeString(genres);
-        parcel.writeDouble(rating);
+        parcel.writeString(rating);
         parcel.writeString(description);
     }
 
@@ -69,7 +69,7 @@ public class MovieContentDetails implements Parcelable {
     }
 
     public String getRuntime() {
-        return Integer.toString(runtime);
+        return runtime;
     }
 
     public String getGenres() {
@@ -77,7 +77,7 @@ public class MovieContentDetails implements Parcelable {
     }
 
     public String getRating() {
-        return Double.toString(rating);
+        return rating;
     }
 
     public String getDescription() {

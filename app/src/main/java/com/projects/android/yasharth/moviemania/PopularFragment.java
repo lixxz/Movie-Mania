@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.projects.android.yasharth.moviemania.Adapters.PopularFragmentAdapter;
 import com.projects.android.yasharth.moviemania.Data.InitialDetails;
 
 import org.json.JSONArray;

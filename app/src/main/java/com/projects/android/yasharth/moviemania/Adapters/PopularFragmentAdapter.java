@@ -1,4 +1,4 @@
-package com.projects.android.yasharth.moviemania.Search;
+package com.projects.android.yasharth.moviemania.Adapters;
 
 import android.content.Context;
 import android.view.View;
@@ -6,26 +6,26 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.projects.android.yasharth.moviemania.PopularFragment;
 import com.projects.android.yasharth.moviemania.R;
-import com.projects.android.yasharth.moviemania.TopRatedFragment;
 import com.squareup.picasso.Picasso;
 
-public class TopRatedFragmentAdapter extends BaseAdapter {
+public class PopularFragmentAdapter extends BaseAdapter {
     private Context context;
 
-    public TopRatedFragmentAdapter(Context c) {
+    public PopularFragmentAdapter(Context c) {
         context = c;
     }
 
     public int getCount() {
-        if (TopRatedFragment.sTopRatedInitialDetailses != null) {
-            return TopRatedFragment.sTopRatedInitialDetailses.size();
+        if (PopularFragment.sPopularInitialDetailses !=null) {
+            return PopularFragment.sPopularInitialDetailses.size();
         }
         return 0;
     }
 
     public Object getItem(int position) {
-        return TopRatedFragment.sTopRatedInitialDetailses.get(position);
+        return PopularFragment.sPopularInitialDetailses.get(position);
     }
 
     public long getItemId(int position) {
@@ -42,7 +42,7 @@ public class TopRatedFragmentAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
         String url = "http://image.tmdb.org/t/p/w154/" +
-                TopRatedFragment.sTopRatedInitialDetailses.get(position).getPoster_path();
+                PopularFragment.sPopularInitialDetailses.get(position).getPoster_path();
 
         Picasso.with(context).
                 load(url).

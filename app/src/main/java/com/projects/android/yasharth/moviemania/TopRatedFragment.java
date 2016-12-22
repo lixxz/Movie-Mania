@@ -10,7 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.projects.android.yasharth.moviemania.Data.InitialDetails;
-import com.projects.android.yasharth.moviemania.Search.TopRatedFragmentAdapter;
+import com.projects.android.yasharth.moviemania.Adapters.TopRatedFragmentAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
